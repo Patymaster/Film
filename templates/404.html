@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>404 — сторінку не знайдено</h1>
+  <p>Схоже, такого посилання не існує.</p>
+  <a class="btn" href="{{ url_for('index') }}">На головну</a>
+</section>
+{% endblock %}

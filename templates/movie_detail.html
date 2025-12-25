@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<a class="back" href="{{ url_for('movies') }}">← Назад до каталогу</a>
+
+<div class="card">
+  <div class="detail-wrap">
+    <img class="poster big" src="{{ url_for('static', filename=movie.poster) }}" alt="Poster {{ movie.title }}">
+
+    <div class="detail-info">
+      <h1 class="detail-title">{{ movie.title }}</h1>
+      <p class="muted">{{ movie.year }} · {{ movie.genre }} · {{ movie.duration }} хв</p>
+
+      <p><b>Режисер:</b> {{ movie.director }}</p>
+      <p><b>Рейтинг:</b> {{ movie.rating }}</p>
+
+      <p><b>Опис:</b></p>
+      <p class="muted">{{ movie.desc }}</p>
+
+      <div class="chiprow">
+        <a class="chip" href="{{ url_for('movies', genre=movie.genre) }}">Жанр: {{ movie.genre }}</a>
+        <a class="chip" href="{{ url_for('movies', q=movie.director) }}">Режисер: {{ movie.director }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Контакти</h1>
+<p class="muted">Форма зворотного зв’язку (демо). Дані не зберігаються в БД.</p>
+
+<form class="card form" method="post">
+  <label>Ім’я
+    <input type="text" name="name" placeholder="Ваше ім’я">
+  </label>
+
+  <label>Email
+    <input type="email" name="email" placeholder="name@example.com">
+  </label>
+
+  <label>Повідомлення
+    <textarea name="message" rows="5" placeholder="Напишіть повідомлення..."></textarea>
+  </label>
+
+  <button class="btn" type="submit">Надіслати</button>
+</form>
+{% endblock %}

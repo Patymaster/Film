@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Фільми</h1>
+
+<form class="search" method="get">
+  <input type="text" name="q" placeholder="Пошук: назва, режисер, опис..." value="{{ q }}">
+
+  <select name="genre">
+    <option value="">Усі жанри</option>
+    {% for g in genres %}
+      <option value="{{ g }}" {% if genre == g %}selected{% endif %}>{{ g }}</option>
+    {% endfor %}
+  </select>
+
+  <select name="sort">
+    <option value="rating_desc" {% if sort=="rating_desc" %}selected{% endif %}>Рейтинг ↓</option>
+    <option value="rating_asc"  {% if sort=="rating_asc"  %}selected{% endif %}>Рейтинг ↑</option>
+    <option value="year_desc"   {% if sort=="year_desc"   %}selected{% endif %}>Рік ↓</option>
+    <option value="year_asc"    {% if sort=="year_asc"    %}selected{% endif %}>Рік ↑</option>
+    <option value="title_asc"   {% if sort=="title_asc"   %}selected{% endif %}>Назва A→Z</option>
+  </select>
+
+  <button class="btn" type="submit">Застосувати</button>
+
+  {% if q or genre or sort != "rating_desc" %}
+    <a class="btn secondary" href="{{ url_for('movies') }}">Скинути</a>
+  {% endif %}
+</form>
+
+<div class="grid">
+  {% for m in movies %}
+    <a class="card linkcard" href="{{ url_for('movie_detail', movie_id=m.id) }}">
+      <img class="poster" src="{{ url_for('static', filename=m.poster) }}" alt="Poster {{ m.title }}">
+      <h3>{{ m.title }}</h3>
+      <p class="muted">{{ m.year }} · {{ m.genre }} · {{ m.duration }} хв</p>
+      <p><b>Рейтинг:</b> {{ m.rating }}</p>
+      <p class="muted clamp">{{ m.desc }}</p>
+      <p class="more">Детальніше →</p>
+    </a>
+  {% else %}
+    <p>Нічого не знайдено.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Жанри</h1>
+
+<div class="grid">
+  {% for g in genres %}
+    <a class="card linkcard" href="{{ url_for('movies', genre=g) }}">
+      <h3>{{ g }}</h3>
+      <p class="muted">Фільмів у жанрі: {{ counts[g] }}</p>
+      <p class="more">Переглянути →</p>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>MovieBase — каталог фільмів</h1>
+  <p>Демо-сайт на Flask: маршрути, шаблон Jinja2, пошук, фільтри та постери.</p>
+  <div class="hero-actions">
+    <a class="btn" href="{{ url_for('movies') }}">Перейти до каталогу</a>
+    <a class="btn secondary" href="{{ url_for('genres') }}">Жанри</a>
+  </div>
+</section>
+
+<section>
+  <h2>Топ-3 за рейтингом</h2>
+  <div class="grid">
+    {% for m in top %}
+      <a class="card linkcard" href="{{ url_for('movie_detail', movie_id=m.id) }}">
+        <img class="poster" src="{{ url_for('static', filename=m.poster) }}" alt="Poster {{ m.title }}">
+        <h3>{{ m.title }}</h3>
+        <p class="muted">{{ m.year }} · {{ m.genre }} · {{ m.duration }} хв</p>
+        <p><b>Рейтинг:</b> {{ m.rating }}</p>
+        <p class="muted clamp">{{ m.desc }}</p>
+        <p class="more">Детальніше →</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
